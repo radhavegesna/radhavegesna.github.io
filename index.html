@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Juhitha Radha Vegesna — ML Systems & Data Engineering</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #F7F5F0;
+  --surface: #EFEDE7;
+  --card: #FFFFFF;
+  --ink: #1A1916;
+  --ink-2: #5C5A55;
+  --ink-3: #9C9A95;
+  --accent: #C84B31;
+  --accent-2: #1E4D8C;
+  --border: rgba(26,25,22,0.10);
+  --border-2: rgba(26,25,22,0.18);
+  --radius: 10px;
+  --radius-lg: 16px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Instrument Sans', sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.6;
+}
+a { color: inherit; text-decoration: none; }
+
+/* NAV */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1rem 2.5rem;
+  background: var(--bg);
+  border-bottom: 0.5px solid var(--border-2);
+  backdrop-filter: blur(8px);
+}
+.nav-name {
+  font-family: 'DM Mono', monospace;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+}
+.nav-links { display: flex; gap: 2rem; }
+.nav-links a {
+  font-size: 13px;
+  color: var(--ink-2);
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--ink); }
+
+/* HERO */
+.hero {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 5rem 2.5rem 4rem;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 2rem;
+  align-items: start;
+}
+.hero-left { max-width: 580px; }
+.hero-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  color: var(--accent);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+.hero h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(36px, 5vw, 52px);
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--ink);
+  margin-bottom: 1.25rem;
+}
+.hero h1 em {
+  font-style: italic;
+  color: var(--accent);
+}
+.hero-bio {
+  font-size: 16px;
+  color: var(--ink-2);
+  line-height: 1.75;
+  margin-bottom: 2rem;
+  max-width: 480px;
+}
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: 'Instrument Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 10px 20px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 1px solid transparent;
+  text-decoration: none;
+}
+.btn-dark {
+  background: var(--ink);
+  color: var(--bg);
+}
+.btn-dark:hover { background: #333; }
+.btn-outline {
+  background: transparent;
+  border-color: var(--border-2);
+  color: var(--ink);
+}
+.btn-outline:hover { background: var(--surface); }
+
+.hero-badge {
+  background: var(--surface);
+  border: 0.5px solid var(--border-2);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  width: 180px;
+  flex-shrink: 0;
+}
+.badge-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-3);
+  margin-bottom: 0.75rem;
+}
+.badge-item {
+  font-size: 12px;
+  color: var(--ink-2);
+  padding: 4px 0;
+  border-bottom: 0.5px solid var(--border);
+  display: flex; align-items: center; gap: 6px;
+}
+.badge-item:last-child { border-bottom: none; }
+.badge-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+
+/* SECTION WRAPPER */
+.section-wrap {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 3.5rem 2.5rem;
+  border-top: 0.5px solid var(--border-2);
+}
+.section-header {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+.section-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--ink-3);
+  letter-spacing: 0.04em;
+}
+.section-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 26px;
+  font-weight: 400;
+  color: var(--ink);
+}
+
+/* PROJECTS */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 12px;
+}
+.project-card {
+  background: var(--card);
+  border: 0.5px solid var(--border-2);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.project-card:hover {
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  transform: translateY(-2px);
+}
+.project-card.featured {
+  border-color: var(--accent);
+  grid-column: span 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+.project-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; }
+.project-icon {
+  font-size: 22px;
+  color: var(--ink-3);
+}
+.project-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 3px 8px;
+  border-radius: 4px;
+  background: rgba(200,75,49,0.1);
+  color: var(--accent);
+}
+.project-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 18px;
+  font-weight: 400;
+  margin-bottom: 0.5rem;
+  color: var(--ink);
+}
+.project-desc {
+  font-size: 13px;
+  color: var(--ink-2);
+  line-height: 1.65;
+  margin-bottom: 1.25rem;
+  flex: 1;
+}
+.project-metrics {
+  display: flex; flex-wrap: wrap; gap: 6px;
+  margin-bottom: 1rem;
+}
+.metric-pill {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--ink-2);
+}
+.metric-pill strong { color: var(--ink); }
+.stack { display: flex; flex-wrap: wrap; gap: 5px; }
+.stack-chip {
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  border: 0.5px solid var(--border-2);
+  color: var(--ink-3);
+  font-family: 'DM Mono', monospace;
+}
+
+/* EXPERIENCE */
+.exp-list { display: flex; flex-direction: column; gap: 0; }
+.exp-row {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 1.5rem;
+  padding: 1.5rem 0;
+  border-bottom: 0.5px solid var(--border);
+}
+.exp-row:first-child { border-top: 0.5px solid var(--border); }
+.exp-date {
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  color: var(--ink-3);
+  padding-top: 3px;
+}
+.exp-role {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+.exp-org {
+  font-size: 13px;
+  color: var(--accent-2);
+  margin-bottom: 0.5rem;
+}
+.exp-detail {
+  font-size: 13px;
+  color: var(--ink-2);
+  line-height: 1.6;
+}
+
+/* SKILLS */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+}
+.skill-group {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+}
+.skill-group-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-3);
+  margin-bottom: 0.75rem;
+}
+.skill-chips { display: flex; flex-wrap: wrap; gap: 5px; }
+.skill-chip {
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: var(--radius);
+  background: var(--card);
+  border: 0.5px solid var(--border-2);
+  color: var(--ink-2);
+}
+
+/* CONTACT */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+.contact-blurb {
+  font-family: 'DM Serif Display', serif;
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--ink);
+  line-height: 1.4;
+  margin-bottom: 1rem;
+}
+.contact-sub {
+  font-size: 14px;
+  color: var(--ink-2);
+  margin-bottom: 1.5rem;
+}
+.contact-links { display: flex; flex-direction: column; gap: 8px; }
+.contact-link {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 14px;
+  border-radius: var(--radius);
+  border: 0.5px solid var(--border-2);
+  background: var(--card);
+  font-size: 13px;
+  color: var(--ink);
+  transition: border-color 0.15s, background 0.15s;
+  cursor: pointer;
+}
+.contact-link:hover { border-color: var(--ink); background: var(--surface); }
+.contact-link-icon { font-size: 16px; color: var(--ink-2); }
+.contact-link-label { flex: 1; font-weight: 500; }
+.contact-link-value { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--ink-3); }
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 2rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--ink-3);
+  border-top: 0.5px solid var(--border);
+}
+
+/* ANIMATIONS */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.hero-left { animation: fadeUp 0.6s ease both; }
+.hero-badge { animation: fadeUp 0.6s 0.15s ease both; }
+.project-card { animation: fadeUp 0.5s ease both; }
+
+/* RESPONSIVE */
+@media (max-width: 700px) {
+  .hero { grid-template-columns: 1fr; }
+  .hero-badge { width: 100%; display: none; }
+  .project-card.featured { grid-column: span 1; grid-template-columns: 1fr; }
+  .contact-grid { grid-template-columns: 1fr; }
+  .exp-row { grid-template-columns: 1fr; gap: 0.25rem; }
+  nav { padding: 1rem 1.25rem; }
+  .hero, .section-wrap { padding-left: 1.25rem; padding-right: 1.25rem; }
+  .nav-links { gap: 1.25rem; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-name">radha vegesna</span>
+  <div class="nav-links">
+    <a href="#projects">Projects</a>
+    <a href="#experience">Experience</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">B.Tech Mathematics & Computing · IISc Bengaluru · 2027</p>
+    <h1>ML systems &amp;<br><em>distributed computing</em><br>engineer</h1>
+    <p class="hero-bio">
+      I build at the intersection of machine learning systems and distributed computing — from CUDA kernels and LLM inference optimization to scalable training pipelines. Currently Vice Chair, IISc ACM-W Student Chapter.
+    </p>
+    <div class="hero-actions">
+      <a href="https://github.com/radhavegesna" target="_blank" class="btn btn-dark">GitHub ↗</a>
+      <a href="https://www.linkedin.com/in/juhitha-radha-vegesna-829114320/" target="_blank" class="btn btn-outline">LinkedIn ↗</a>
+      <a href="mailto:radhavegesna56@gmail.com" class="btn btn-outline">Email</a>
+    </div>
+  </div>
+  <div class="hero-badge">
+    <p class="badge-label">Currently</p>
+    <div class="badge-item"><span class="badge-dot"></span>IISc B.Tech '27</div>
+    <div class="badge-item"><span class="badge-dot"></span>EXL Service Intern</div>
+    <div class="badge-item"><span class="badge-dot"></span>ACM-W Vice Chair</div>
+    <div class="badge-item"><span class="badge-dot"></span>GS Quant Challenge</div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="section-wrap">
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <h2 class="section-title">Projects</h2>
+  </div>
+  <div class="projects-grid">
+
+    <div class="project-card featured">
+      <div>
+        <div class="project-top">
+          <span style="font-size:22px;color:var(--ink-3)">⬡</span>
+          <span class="project-tag">Featured</span>
+        </div>
+        <h3 class="project-title">Distributed SLM training pipeline</h3>
+        <p class="project-desc">Benchmarked Apache Spark on YARN vs DeepSpeed ZeRO on SLURM for distributed small language model training. Identified ZeRO-3 as the optimal configuration for scaling efficiency across nodes.</p>
+        <div class="project-metrics">
+          <span class="metric-pill"><strong>ZeRO-3</strong> optimal config</span>
+          <span class="metric-pill">DS256 course project</span>
+        </div>
+      </div>
+      <div>
+        <p class="project-desc" style="margin-bottom:1rem">Comprehensive comparison of two paradigms — data-parallel Spark vs. ZeRO-stage sharding in DeepSpeed — with analysis of communication overhead, memory efficiency, and scaling curves.</p>
+        <div class="stack">
+          <span class="stack-chip">Apache Spark</span>
+          <span class="stack-chip">DeepSpeed</span>
+          <span class="stack-chip">SLURM</span>
+          <span class="stack-chip">YARN</span>
+          <span class="stack-chip">PyTorch</span>
+          <span class="stack-chip">Python</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-top">
+        <span style="font-size:22px;color:var(--ink-3)">▣</span>
+      </div>
+      <h3 class="project-title">CUDA megakernel benchmarking</h3>
+      <p class="project-desc">Custom megakernel vs HuggingFace for autoregressive LLM decoding on RTX 3050. Implemented true weight-amortized batched decoding across batch sizes and context lengths.</p>
+      <div class="project-metrics">
+        <span class="metric-pill">RTX 3050</span>
+        <span class="metric-pill">multi-batch × context</span>
+      </div>
+      <div class="stack">
+        <span class="stack-chip">CUDA</span>
+        <span class="stack-chip">C++</span>
+        <span class="stack-chip">HuggingFace</span>
+        <span class="stack-chip">Python</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-top">
+        <span style="font-size:22px;color:var(--ink-3)">◈</span>
+      </div>
+      <h3 class="project-title">LLM inference optimization</h3>
+      <p class="project-desc">IEEE-format technical report covering Flash Attention, Flash Decoding, megakernel fusion, and KV-cache quantization for efficient LLM serving at scale.</p>
+      <div class="project-metrics">
+        <span class="metric-pill">IEEE format</span>
+      </div>
+      <div class="stack">
+        <span class="stack-chip">Flash Attention</span>
+        <span class="stack-chip">KV-cache</span>
+        <span class="stack-chip">LaTeX</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-top">
+        <span style="font-size:22px;color:var(--ink-3)">◫</span>
+      </div>
+      <h3 class="project-title">DNN checkpointing strategies</h3>
+      <p class="project-desc">Implemented and benchmarked 3 checkpointing strategies — synchronous, persist-only, and snapshot+persist pipelining — on LeNet-5/MNIST. Resolved GPU tensor copy and queue-blocking bugs.</p>
+      <div class="project-metrics">
+        <span class="metric-pill">3 strategies</span>
+        <span class="metric-pill">LeNet-5 / MNIST</span>
+      </div>
+      <div class="stack">
+        <span class="stack-chip">PyTorch</span>
+        <span class="stack-chip">CUDA</span>
+        <span class="stack-chip">Python</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-top">
+        <span style="font-size:22px;color:var(--ink-3)">◎</span>
+      </div>
+      <h3 class="project-title">Portfolio optimization — GS Hackathon</h3>
+      <p class="project-desc">Quant challenge solution for Goldman Sachs India Hackathon 2026. Python-based iterative optimizer targeting Sharpe ratio maximization with turnover constraints.</p>
+      <div class="project-metrics">
+        <span class="metric-pill">GS India 2026</span>
+        <span class="metric-pill">Quant track</span>
+      </div>
+      <div class="stack">
+        <span class="stack-chip">Python</span>
+        <span class="stack-chip">NumPy</span>
+        <span class="stack-chip">SciPy</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" class="section-wrap">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <h2 class="section-title">Experience</h2>
+  </div>
+  <div class="exp-list">
+    <div class="exp-row">
+      <span class="exp-date">Summer 2026</span>
+      <div>
+        <p class="exp-role">Data Engineering & AI Intern</p>
+        <p class="exp-org">EXL Service</p>
+        <p class="exp-detail">Upcoming internship in data engineering and applied AI at EXL Service.</p>
+      </div>
+    </div>
+    <div class="exp-row">
+      <span class="exp-date">2024</span>
+      <div>
+        <p class="exp-role">Research Intern</p>
+        <p class="exp-org">Control & Robotics Lab, EE Dept · IISc Bengaluru</p>
+        <p class="exp-detail">Research internship in the Electrical Engineering department at the Indian Institute of Science, Bengaluru.</p>
+      </div>
+    </div>
+    <div class="exp-row">
+      <span class="exp-date">2024–present</span>
+      <div>
+        <p class="exp-role">Vice Chair</p>
+        <p class="exp-org">IISc ACM-W Student Chapter</p>
+        <p class="exp-detail">Leadership role in the women in computing student chapter at IISc, organizing events and initiatives for the tech community.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="section-wrap">
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <h2 class="section-title">Skills</h2>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-group">
+      <p class="skill-group-label">ML & Systems</p>
+      <div class="skill-chips">
+        <span class="skill-chip">PyTorch</span>
+        <span class="skill-chip">CUDA</span>
+        <span class="skill-chip">DeepSpeed</span>
+        <span class="skill-chip">Flash Attention</span>
+        <span class="skill-chip">HuggingFace</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <p class="skill-group-label">Distributed Systems</p>
+      <div class="skill-chips">
+        <span class="skill-chip">Apache Spark</span>
+        <span class="skill-chip">SLURM</span>
+        <span class="skill-chip">YARN</span>
+        <span class="skill-chip">Kafka</span>
+        <span class="skill-chip">Spark Streaming</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <p class="skill-group-label">Languages</p>
+      <div class="skill-chips">
+        <span class="skill-chip">Python</span>
+        <span class="skill-chip">C++</span>
+        <span class="skill-chip">CUDA C</span>
+        <span class="skill-chip">SQL</span>
+        <span class="skill-chip">LaTeX</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <p class="skill-group-label">Areas</p>
+      <div class="skill-chips">
+        <span class="skill-chip">LLM inference</span>
+        <span class="skill-chip">ML Systems</span>
+        <span class="skill-chip">Data Engineering</span>
+        <span class="skill-chip">Quant Finance</span>
+        <span class="skill-chip">Robotics</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="section-wrap">
+  <div class="section-header">
+    <span class="section-num">04</span>
+    <h2 class="section-title">Contact</h2>
+  </div>
+  <div class="contact-grid">
+    <div>
+      <p class="contact-blurb">Open to research roles, internships, and collaborations.</p>
+      <p class="contact-sub">Currently at IISc Bengaluru. Graduating 2027. Interested in ML systems, LLM inference, and data engineering.</p>
+    </div>
+    <div class="contact-links">
+      <a href="mailto:radhavegesna56@gmail.com" class="contact-link">
+        <span class="contact-link-icon">✉</span>
+        <span class="contact-link-label">Email</span>
+        <span class="contact-link-value">radhavegesna56@gmail.com</span>
+      </a>
+      <a href="https://github.com/radhavegesna" target="_blank" class="contact-link">
+        <span class="contact-link-icon">⌥</span>
+        <span class="contact-link-label">GitHub</span>
+        <span class="contact-link-value">radhavegesna</span>
+      </a>
+      <a href="https://www.linkedin.com/in/juhitha-radha-vegesna-829114320/" target="_blank" class="contact-link">
+        <span class="contact-link-icon">◈</span>
+        <span class="contact-link-label">LinkedIn</span>
+        <span class="contact-link-value">juhitha-radha-vegesna</span>
+
+<footer>
+  <p>© 2026 Juhitha Radha Vegesna · radhavegesna.github.io</p>
+</footer>
+
+</body>
+</html>
